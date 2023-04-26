@@ -1,6 +1,7 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#statusText");
 const restartBtn = document.getElementById("restartBtn");
+const title = document.querySelector(".title");
 let options = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
 let running = false;
@@ -61,15 +62,18 @@ function checkWinner() {
     }
     if (cellA == cellB && cellB == cellC) {
       roundWon = true;
+
       break;
     }
   }
 
   if (roundWon) {
     statusText.textContent = `${currentPlayer} wins!`;
+    statusText.style.color = "#F97B22";
     running = false;
   } else if (!options.includes("")) {
     statusText.textContent = `Draw!`;
+    statusText.style.color = "#F97B22";
     running = false;
   } else {
     changePlayer();
@@ -81,4 +85,7 @@ function restartGame() {
   statusText.textContent = `${currentPlayer}'s turn`;
   cells.forEach((cell) => (cell.textContent = ""));
   running = true;
+  statusText.style.color = "";
 }
+
+title.addEventListener("click", restartGame);
